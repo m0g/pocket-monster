@@ -5,8 +5,10 @@ export default function Detail({ name, sprites, types }) {
       <div>
         <h3>{name}</h3>
         <div className="flex flex-row gap-2">
-          {types.map((type) => (
-            <div className="bg-blue-700 text-white">{type.name}</div>
+          {types.map((type, i) => (
+            <div key={i} className="bg-blue-700 text-white">
+              {type.name}
+            </div>
           ))}
         </div>
         <svg

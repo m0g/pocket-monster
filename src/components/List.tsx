@@ -8,7 +8,7 @@ export default function List() {
   return (
     <main className="grid grid-cols-5 gap-4 px-4">
       {pokemons.map((pokemon) => (
-        <Detail {...pokemon} />
+        <Detail key={pokemon.id} {...pokemon} />
       ))}
     </main>
   );

@@ -4,7 +4,9 @@ import { useContext } from "react";
 import { PokemonsContext } from "../contexts/Pokemon";
 
 export default function usefetchPokemons() {
-  const { pokemons, setPokemons } = useContext(PokemonsContext);
+  const { pokemons, setPokemons, allPokemons, setAllPokemons } =
+    useContext(PokemonsContext);
+
   const { isLoading, error, data } = useQuery({
     queryKey: ["repoData"],
     queryFn: () =>
@@ -27,6 +29,7 @@ export default function usefetchPokemons() {
 
   if (data?.allPokemon) {
     setPokemons(data.allPokemon);
+    // setAllPokemons(data.allPokemon);
   }
 
   return { isLoading, error, data, pokemons };
