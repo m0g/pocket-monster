@@ -1,14 +1,17 @@
-import useSearchPokemon from "../hooks/searchPokemons";
+import { useCallback, useContext } from "react";
+import { PokemonsContext } from "../contexts/Pokemon";
 
 export default function Search() {
-  const { onChange } = useSearchPokemon();
+  const { query, setQuery } = useContext(PokemonsContext);
 
+  const handleChange = (e) => setQuery(e.target.value);
   return (
     <input
       type="text"
       placeholder="Search"
       className="px-2"
-      onChange={onChange}
+      onChange={handleChange}
+      value={query}
     />
   );
 }

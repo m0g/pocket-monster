@@ -8,6 +8,7 @@ export const PokemonsContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [types, setTypes] = useState([]);
   const [selectedType, setSelectedType] = useState("");
+  const [query, setQuery] = useState("");
 
   if (allPokemons.length > 0 && types.length === 0) {
     setTypes(() => {
@@ -43,9 +44,14 @@ export const PokemonsContextProvider = ({ children }) => {
     });
   }, [selectedType]);
 
+  useEffect(() => {
+    setPokemons(allPokemons.filter(({ name }) => name.indexOf(query) !== -1));
+  }, [query]);
+
   const reset = () => {
     setPokemons(allPokemons);
     setSelectedType("");
+    setQuery("");
   };
 
   const pokemonsContext = {
@@ -59,6 +65,8 @@ export const PokemonsContextProvider = ({ children }) => {
     selectedType,
     setSelectedType,
     reset,
+    query,
+    setQuery,
   };
 
   return (
