@@ -1,13 +1,15 @@
-import { useContext } from "react";
-import { PokemonsContext } from "../contexts/Pokemon";
 import Detail from "./Detail";
+import usefetchPokemons from "./../hooks/fetchPokemons";
 
 export default function List() {
-  const { pokemons } = useContext(PokemonsContext);
+  const { isLoading, pokemons } = usefetchPokemons();
 
+  if (isLoading) return "Loading...";
+
+  console.log(pokemons);
   return (
     <main className="grid grid-cols-5 gap-4 px-4">
-      {pokemons.map((pokemon) => (
+      {pokemons.slice(0, 50).map((pokemon) => (
         <Detail key={pokemon.id} {...pokemon} />
       ))}
     </main>
