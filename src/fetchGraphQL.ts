@@ -13,7 +13,9 @@ async function fetchGraphQL(text, variables) {
   });
 
   // Get the response as JSON
-  return await response.json();
+  const json = await response.json();
+
+  return json.data;
 }
 
 export default fetchGraphQL;
