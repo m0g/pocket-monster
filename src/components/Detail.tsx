@@ -1,6 +1,6 @@
 export default function Detail({ name, sprites, types }) {
   return (
-    <figure className="bg-slate-300 rounded flex shadow-sm">
+    <figure className="bg-slate-300 rounded flex shadow-sm relative">
       <img src={sprites.front_default} />
       <div>
         <h3>{name}</h3>
@@ -17,7 +17,7 @@ export default function Detail({ name, sprites, types }) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-6 h-6 absolute right-2 bottom-2"
         >
           <path
             strokeLinecap="round"
