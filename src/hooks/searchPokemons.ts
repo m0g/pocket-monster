@@ -6,12 +6,9 @@ export default function useSearchPokemon() {
 
   const onChange = (e) => {
     const query = e.target.value;
+    const rep = allPokemons.filter(({ name }) => name.indexOf(query) !== -1);
 
-    if (query.length > 2) {
-      const rep = allPokemons.filter(({ name }) => name.indexOf(query) !== -1);
-      console.log(query, rep);
-      setPokemons(rep);
-    }
+    setPokemons(rep);
   };
 
   return { onChange };

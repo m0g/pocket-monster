@@ -6,7 +6,6 @@ export default function List() {
 
   if (isLoading) return "Loading...";
 
-  console.log(pokemons);
   return (
     <main className="grid grid-cols-5 gap-4 px-4">
       {pokemons.slice(0, 50).map((pokemon) => (
