@@ -1,5 +1,5 @@
-import List from "./components/List";
-import Header from "./components/Header";
+import List from "./List";
+import Header from "./Header";
 
 function App() {
   return (
