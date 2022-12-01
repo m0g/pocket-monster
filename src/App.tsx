@@ -2,7 +2,8 @@ import SearchForm from "./components/SearchForm";
 import fetchGraphQL from "./fetchGraphQL";
 import { useQuery } from "@tanstack/react-query";
 import usefetchPokemons from "./hooks/fetchPokemons";
-import { List } from "./components/List";
+import List from "./components/List";
+import Header from "./components/Header";
 
 function App() {
   const { isLoading, error } = usefetchPokemons();
@@ -12,11 +13,8 @@ function App() {
   if (error) return "An error has occurred: " + error.message;
 
   return (
-    <div className="">
-      <header>
-        <h1 className="text-3xl font-bold">Pocket monsters</h1>
-        <SearchForm />
-      </header>
+    <div className="pt-20">
+      <Header />
       <List />
     </div>
   );
