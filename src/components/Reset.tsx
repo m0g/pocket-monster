@@ -2,8 +2,7 @@ import { useContext } from "react";
 import { PokemonsContext } from "../contexts/Pokemon";
 
 export default function Reset() {
-  const { allPokemons, setPokemons } = useContext(PokemonsContext);
-  const handleClick = () => setPokemons(allPokemons);
+  const { reset } = useContext(PokemonsContext);
 
-  return <button onClick={handleClick}>Reset</button>;
+  return <button onClick={reset}>Reset</button>;
 }

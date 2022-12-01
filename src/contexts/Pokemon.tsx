@@ -43,6 +43,11 @@ export const PokemonsContextProvider = ({ children }) => {
     });
   }, [selectedType]);
 
+  const reset = () => {
+    setPokemons(allPokemons);
+    setSelectedType("");
+  };
+
   const pokemonsContext = {
     pokemons,
     setPokemons,
@@ -53,6 +58,7 @@ export const PokemonsContextProvider = ({ children }) => {
     types,
     selectedType,
     setSelectedType,
+    reset,
   };
 
   return (
