@@ -3,10 +3,10 @@ import { useState, createContext, useEffect } from "react";
 export const PokemonsContext = createContext({});
 
 export const PokemonsContextProvider = ({ children }) => {
-  const [pokemons, setPokemons] = useState([]);
-  const [allPokemons, setAllPokemons] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [types, setTypes] = useState([]);
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [types, setTypes] = useState<Type[]>([]);
   const [selectedType, setSelectedType] = useState("");
   const [query, setQuery] = useState("");
 
