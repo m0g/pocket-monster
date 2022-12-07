@@ -1,34 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { PokemonsContext } from "../contexts/Pokemon";
 
 export default function Sort() {
-  const [sortName, setSortName] = useState("name");
-  const [sortDirection, setSortDirection] = useState("asc");
-
-  const handleClickName = () => {
-    if (sortName === "name") {
-      if (sortDirection === "asc") {
-        setSortDirection("desc");
-      } else {
-        setSortDirection("asc");
-      }
-    } else {
-      setSortName("name");
-      setSortDirection("asc");
-    }
-  };
-
-  const handleClickType = () => {
-    if (sortName === "type") {
-      if (sortDirection === "asc") {
-        setSortDirection("desc");
-      } else {
-        setSortDirection("asc");
-      }
-    } else {
-      setSortName("type");
-      setSortDirection("asc");
-    }
-  };
+  const { sortDirection, sortName, handleClickName, handleClickType } =
+    useContext(PokemonsContext);
 
   return (
     <div className="px-4 max-w-7xl mx-auto flex gap-2 mb-2">

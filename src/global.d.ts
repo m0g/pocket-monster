@@ -13,4 +13,8 @@ declare global {
       front_default: string;
     };
   };
+
+  type SortName = "name" | "type" | null;
+
+  type SortDirection = "asc" | "desc";
 }

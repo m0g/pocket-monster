@@ -1,14 +1,126 @@
 import { useState, createContext, useEffect } from "react";
 
-export const PokemonsContext = createContext({});
+interface PokemonsContextInterface {
+  pokemons: Pokemon[];
+  setPokemons: (pokemons: Pokemon[]) => void;
+  allPokemons: Pokemon[];
+  setAllPokemons: (allPokemons: Pokemon[]) => void;
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
+  types: Type[];
+  selectedType: string;
+  setSelectedType: (selectedType: string) => void;
+  reset: () => void;
+  query: string;
+  setQuery: (query: string) => void;
+  sortName: string | null;
+  sortDirection: string;
+  handleClickName: () => void;
+  handleClickType: () => void;
+}
 
-export const PokemonsContextProvider = ({ children }) => {
+const defaultValues: PokemonsContextInterface = {
+  pokemons: [],
+  setPokemons: () => {},
+  allPokemons: [],
+  setAllPokemons: () => {},
+  isLoading: true,
+  setIsLoading: () => {},
+  types: [],
+  selectedType: "",
+  setSelectedType: () => {},
+  reset: () => {},
+  query: "",
+  setQuery: () => {},
+  sortName: null,
+  sortDirection: "",
+  handleClickName: () => {},
+  handleClickType: () => {},
+};
+
+export const PokemonsContext =
+  createContext<PokemonsContextInterface>(defaultValues);
+
+export const PokemonsContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [types, setTypes] = useState<Type[]>([]);
   const [selectedType, setSelectedType] = useState("");
   const [query, setQuery] = useState("");
+  const [sortName, setSortName] = useState<SortName>(null);
+  const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
+
+  const handleClickName = () => {
+    if (sortName === "name") {
+      if (sortDirection === "asc") {
+        setSortDirection("desc");
+      } else {
+        setSortDirection("asc");
+      }
+    } else {
+      setSortName("name");
+      setSortDirection("asc");
+    }
+  };
+
+  const handleClickType = () => {
+    if (sortName === "type") {
+      if (sortDirection === "asc") {
+        setSortDirection("desc");
+      } else {
+        setSortDirection("asc");
+      }
+    } else {
+      setSortName("type");
+      setSortDirection("asc");
+    }
+  };
+
+  useEffect(() => {
+    if (sortName === "name" && sortDirection === "asc") {
+      const res = pokemons.sort((a, b) => {
+        if (a.name < b.name) {
+          return -1;
+        }
+        if (a.name > b.name) {
+          return 1;
+        }
+        return 0;
+      });
+      console.log(sortName, sortDirection, res[0]);
+      setPokemons(res);
+      // setPokemons(
+      //   pokemons.sort((a, b) => {
+      //     if (a.name < b.name) {
+      //       return -1;
+      //     }
+      //     if (a.name > b.name) {
+      //       return 1;
+      //     }
+      //     return 0;
+      //   })
+      // );
+    }
+
+    if (sortName === "name" && sortDirection === "desc") {
+      setPokemons(
+        pokemons.sort((a, b) => {
+          if (a.name > b.name) {
+            return -1;
+          }
+          if (a.name < b.name) {
+            return 1;
+          }
+          return 0;
+        })
+      );
+    }
+  }, [sortDirection, sortName, setPokemons, pokemons]);
 
   if (allPokemons.length > 0 && types.length === 0) {
     setTypes(() => {
@@ -67,6 +179,10 @@ export const PokemonsContextProvider = ({ children }) => {
     reset,
     query,
     setQuery,
+    sortName,
+    sortDirection,
+    handleClickName,
+    handleClickType,
   };
 
   return (
