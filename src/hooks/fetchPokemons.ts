@@ -1,5 +1,5 @@
 import fetchGraphQL from "./../fetchGraphQL";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PokemonsContext } from "../contexts/Pokemon";
 
 const GetAllPokemons = `
@@ -27,15 +27,22 @@ export default function usefetchPokemons() {
     setIsLoading,
   } = useContext(PokemonsContext);
 
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    fetchGraphQL(GetAllPokemons, {}).then((data) => {
-      if (data?.allPokemon) {
-        setPokemons(data.allPokemon);
-        setAllPokemons(data.allPokemon);
-      }
-      setIsLoading(false);
-    });
+    fetchGraphQL(GetAllPokemons, {})
+      .then((data) => {
+        if (data?.allPokemon) {
+          setPokemons(data.allPokemon);
+          setAllPokemons(data.allPokemon);
+        }
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        setError(e);
+        setIsLoading(false);
+      });
   }, []);
 
-  return { isLoading, pokemons };
+  return { isLoading, pokemons, error };
 }
