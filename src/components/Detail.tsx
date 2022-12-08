@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { PokemonsContext } from "../contexts/Pokemon";
 
 export default function Detail({

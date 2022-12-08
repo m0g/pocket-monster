@@ -13,6 +13,7 @@ interface PokemonsContextInterface {
   reset: () => void;
   query: string;
   setQuery: (query: string) => void;
+  toggleFavorite: (id: number, isFavorite: boolean) => void;
 }
 
 const defaultValues: PokemonsContextInterface = {
@@ -28,6 +29,7 @@ const defaultValues: PokemonsContextInterface = {
   reset: () => undefined,
   query: "",
   setQuery: () => undefined,
+  toggleFavorite: () => undefined,
 };
 export const PokemonsContext =
   createContext<PokemonsContextInterface>(defaultValues);
