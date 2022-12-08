@@ -42,44 +42,44 @@ export const PokemonsContextProvider = ({
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [types, setTypes] = useState<Type[]>([]);
+  // const [types, setTypes] = useState<Type[]>([]);
   const [selectedType, setSelectedType] = useState("");
   const [query, setQuery] = useState("");
 
-  if (allPokemons.length > 0 && types.length === 0) {
-    setTypes(() => {
-      const allTypes = [];
-      for (const pokemon of allPokemons) {
-        for (const type of pokemon.types) {
-          if (allTypes.indexOf(type.name) === -1) {
-            allTypes.push(type.name);
-          }
-        }
-      }
-      return allTypes;
-    });
-  }
+  // if (allPokemons.length > 0 && types.length === 0) {
+  //   setTypes(() => {
+  //     const allTypes = [];
+  //     for (const pokemon of allPokemons) {
+  //       for (const type of pokemon.types) {
+  //         if (allTypes.indexOf(type.name) === -1) {
+  //           allTypes.push(type.name);
+  //         }
+  //       }
+  //     }
+  //     return allTypes;
+  //   });
+  // }
 
-  useEffect(() => {
-    console.log("selected type");
-    setPokemons(() => {
-      if (selectedType === "") {
-        return allPokemons;
-      }
+  // useEffect(() => {
+  //   console.log("selected type");
+  //   setPokemons(() => {
+  //     if (selectedType === "") {
+  //       return allPokemons;
+  //     }
 
-      return allPokemons.filter(({ types }) => {
-        let shouldInclude = false;
+  //     return allPokemons.filter(({ types }) => {
+  //       let shouldInclude = false;
 
-        for (const type of types) {
-          if (type.name === selectedType) {
-            shouldInclude = true;
-          }
-        }
+  //       for (const type of types) {
+  //         if (type.name === selectedType) {
+  //           shouldInclude = true;
+  //         }
+  //       }
 
-        return shouldInclude;
-      });
-    });
-  }, [selectedType, allPokemons]);
+  //       return shouldInclude;
+  //     });
+  //   });
+  // }, [selectedType, allPokemons]);
 
   useEffect(() => {
     console.log("query set pokemon");
@@ -119,7 +119,6 @@ export const PokemonsContextProvider = ({
     setAllPokemons,
     isLoading,
     setIsLoading,
-    types,
     selectedType,
     setSelectedType,
     reset,

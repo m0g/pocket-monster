@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function Header({
   disableFilters = false,
 }: {
-  disableFilters: boolean;
+  disableFilters?: boolean;
 }) {
   return (
     <header className="fixed top-0 left-0 right-0 bg-slate-300 flex flex-row justify-between py-2 px-4 shadow z-10">

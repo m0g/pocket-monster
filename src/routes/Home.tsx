@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import usefetchPokemons from "./../hooks/fetchPokemons";
 
 export default function Home() {
-  const { isLoading, error } = usefetchPokemons();
+  const { isLoading, error } = usefetchPokemons({ onlyFavorites: false });
 
   if (isLoading) return <p>Loading...</p>;
 
