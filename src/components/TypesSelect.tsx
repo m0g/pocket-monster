@@ -1,12 +1,9 @@
-// import { useContext } from "react";
-// import { PokemonsContext } from "../contexts/Pokemon";
 import useSelectType from "../hooks/selectType";
 
 export default function TypesSelect() {
-  // const { types, selectedType, setSelectedType } = useContext(PokemonsContext);
   const { types, selectedType, setSelectedType } = useSelectType();
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedType(e.target.value);
   };
 

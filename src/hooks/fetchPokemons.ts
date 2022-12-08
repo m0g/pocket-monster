@@ -21,11 +21,10 @@ export default function usefetchPokemons({ onlyFavorites = false }) {
   const { pokemons, setPokemons, setAllPokemons, isLoading, setIsLoading } =
     useContext(PokemonsContext);
 
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    const getOnlyFavorites = (pokemons) => {
-      // const pokemonsCopy = [...pokemons];
+    const getOnlyFavorites = (pokemons: Pokemon[]) => {
       return pokemons.filter(({ isFavorite }) => isFavorite);
     };
 
@@ -38,13 +37,15 @@ export default function usefetchPokemons({ onlyFavorites = false }) {
         setIsLoading(false);
       });
     } else {
-      fetchGraphQL(GetAllPokemons, {})
+      fetchGraphQL(GetAllPokemons)
         .then((data) => {
           if (data?.allPokemon) {
-            const pokemonsWithFavorites = data.allPokemon.map((pokemon) => ({
-              ...pokemon,
-              isFavorite: false,
-            }));
+            const pokemonsWithFavorites = data.allPokemon.map(
+              (pokemon: Pokemon) => ({
+                ...pokemon,
+                isFavorite: false,
+              })
+            );
 
             setPokemons(
               onlyFavorites
@@ -55,12 +56,12 @@ export default function usefetchPokemons({ onlyFavorites = false }) {
           }
           setIsLoading(false);
         })
-        .catch((e) => {
+        .catch((e: Error) => {
           setError(e);
           setIsLoading(false);
         });
     }
-  }, [setAllPokemons, setPokemons, setIsLoading, setError]);
+  }, [setAllPokemons, setPokemons, setIsLoading, setError, onlyFavorites]);
 
   return { isLoading, pokemons, error };
 }

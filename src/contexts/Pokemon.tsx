@@ -1,34 +1,32 @@
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext, useEffect, SetStateAction } from "react";
 
 interface PokemonsContextInterface {
   pokemons: Pokemon[];
-  setPokemons: (pokemons: Pokemon[]) => void;
+  setPokemons: React.Dispatch<SetStateAction<Pokemon[]>>;
   allPokemons: Pokemon[];
-  setAllPokemons: (allPokemons: Pokemon[]) => void;
+  setAllPokemons: React.Dispatch<SetStateAction<Pokemon[]>>;
   isLoading: boolean;
-  setIsLoading: (isLoading: boolean) => void;
-  types: Type[];
+  setIsLoading: React.Dispatch<SetStateAction<boolean>>;
   selectedType: string;
-  setSelectedType: (selectedType: string) => void;
+  setSelectedType: React.Dispatch<SetStateAction<string>>;
   reset: () => void;
   query: string;
-  setQuery: (query: string) => void;
+  setQuery: React.Dispatch<SetStateAction<string>>;
   toggleFavorite: (id: number, isFavorite: boolean) => void;
 }
 
 const defaultValues: PokemonsContextInterface = {
   pokemons: [],
-  setPokemons: () => undefined,
+  setPokemons: () => [],
   allPokemons: [],
-  setAllPokemons: () => undefined,
+  setAllPokemons: () => [],
   isLoading: true,
-  setIsLoading: () => undefined,
-  types: [],
+  setIsLoading: () => true,
   selectedType: "",
-  setSelectedType: () => undefined,
+  setSelectedType: () => "",
   reset: () => undefined,
   query: "",
-  setQuery: () => undefined,
+  setQuery: () => "",
   toggleFavorite: () => undefined,
 };
 export const PokemonsContext =

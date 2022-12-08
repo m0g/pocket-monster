@@ -2,7 +2,8 @@ import useSearchPokemons from "../hooks/searchPokemons";
 
 export default function Search() {
   const { query, setQuery } = useSearchPokemons();
-  const handleChange = (e) => setQuery(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setQuery(e.target.value);
 
   return (
     <input

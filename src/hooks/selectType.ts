@@ -2,9 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { PokemonsContext } from "../contexts/Pokemon";
 
 export default function useSelectType() {
-  const [types, setTypes] = useState<Type[]>([]);
+  const [types, setTypes] = useState<string[]>([]);
 
-  const { pokemons, selectedType, setSelectedType, allPokemons, setPokemons } =
+  const { selectedType, setSelectedType, allPokemons, setPokemons } =
     useContext(PokemonsContext);
 
   if (allPokemons.length > 0 && types.length === 0) {
@@ -39,7 +39,7 @@ export default function useSelectType() {
         return shouldInclude;
       });
     });
-  }, [selectedType, allPokemons]);
+  }, [selectedType, allPokemons, setPokemons]);
 
   return { types, selectedType, setSelectedType };
 }
