@@ -66,6 +66,39 @@ export default function useSortPokemons() {
         })
       );
     }
+
+    // Sort for types is only done on the first type of each pokemon
+    if (sortName === "type" && sortDirection === "asc") {
+      const pokemonsCopy = [...pokemons];
+
+      setPokemons(
+        pokemonsCopy.sort((a, b) => {
+          if (a.types[0].name < b.types[0].name) {
+            return -1;
+          }
+          if (a.types[0].name > b.types[0].name) {
+            return 1;
+          }
+          return 0;
+        })
+      );
+    }
+
+    if (sortName === "type" && sortDirection === "desc") {
+      const pokemonsCopy = [...pokemons];
+
+      setPokemons(
+        pokemonsCopy.sort((a, b) => {
+          if (a.types[0].name > b.types[0].name) {
+            return -1;
+          }
+          if (a.types[0].name < b.types[0].name) {
+            return 1;
+          }
+          return 0;
+        })
+      );
+    }
   }, [sortDirection, sortName, setPokemons, pokemons]);
 
   return { handleClickName, handleClickType, sortDirection, sortName };
