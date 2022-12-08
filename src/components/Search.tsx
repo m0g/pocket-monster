@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { PokemonsContext } from "../contexts/Pokemon";
+import useSearchPokemons from "../hooks/searchPokemons";
 
 export default function Search() {
-  const { query, setQuery } = useContext(PokemonsContext);
+  const { query, setQuery } = useSearchPokemons();
   const handleChange = (e) => setQuery(e.target.value);
 
   return (
