@@ -31,7 +31,7 @@ export default function usefetchPokemons() {
 
   useEffect(() => {
     if (localStorage.getItem("allPokemons")) {
-      const store = JSON.parse(localStorage.getItem("allPokemons"));
+      const store = JSON.parse(localStorage.getItem("allPokemons") || "{}");
 
       setPokemons(store);
       setAllPokemons(store);

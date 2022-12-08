@@ -1,4 +1,7 @@
-export default function Detail({ name, sprites, types }) {
+export default function Detail({ name, sprites, types }: Pokemon) {
+  const handleClick = () => {
+    console.log("hello");
+  };
   return (
     <figure className="bg-slate-300 rounded flex shadow-sm relative">
       <img src={sprites.front_default} />
@@ -12,12 +15,13 @@ export default function Detail({ name, sprites, types }) {
           ))}
         </div>
         <svg
+          onClick={handleClick}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 absolute right-2 bottom-2"
+          className="w-6 h-6 absolute right-2 bottom-2 cursor-pointer"
         >
           <path
             strokeLinecap="round"

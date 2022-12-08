@@ -19,27 +19,9 @@ interface PokemonsContextInterface {
   handleClickType: () => void;
 }
 
-const defaultValues: PokemonsContextInterface = {
-  pokemons: [],
-  setPokemons: () => {},
-  allPokemons: [],
-  setAllPokemons: () => {},
-  isLoading: true,
-  setIsLoading: () => {},
-  types: [],
-  selectedType: "",
-  setSelectedType: () => {},
-  reset: () => {},
-  query: "",
-  setQuery: () => {},
-  sortName: null,
-  sortDirection: "",
-  handleClickName: () => {},
-  handleClickType: () => {},
-};
-
-export const PokemonsContext =
-  createContext<PokemonsContextInterface>(defaultValues);
+export const PokemonsContext = createContext<
+  PokemonsContextInterface | undefined
+>(undefined);
 
 export const PokemonsContextProvider = ({
   children,
@@ -124,9 +106,9 @@ export const PokemonsContextProvider = ({
 
   if (allPokemons.length > 0 && types.length === 0) {
     setTypes(() => {
-      let allTypes = [];
-      for (let pokemon of allPokemons) {
-        for (let type of pokemon.types) {
+      const allTypes = [];
+      for (const pokemon of allPokemons) {
+        for (const type of pokemon.types) {
           if (allTypes.indexOf(type.name) === -1) {
             allTypes.push(type.name);
           }
@@ -145,7 +127,7 @@ export const PokemonsContextProvider = ({
       return allPokemons.filter(({ types }) => {
         let shouldInclude = false;
 
-        for (let type of types) {
+        for (const type of types) {
           if (type.name === selectedType) {
             shouldInclude = true;
           }
