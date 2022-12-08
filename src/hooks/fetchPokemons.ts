@@ -30,18 +30,26 @@ export default function usefetchPokemons() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchGraphQL(GetAllPokemons, {})
-      .then((data) => {
-        if (data?.allPokemon) {
-          setPokemons(data.allPokemon);
-          setAllPokemons(data.allPokemon);
-        }
-        setIsLoading(false);
-      })
-      .catch((e) => {
-        setError(e);
-        setIsLoading(false);
-      });
+    if (localStorage.getItem("allPokemons")) {
+      const store = JSON.parse(localStorage.getItem("allPokemons"));
+
+      setPokemons(store);
+      setAllPokemons(store);
+      setIsLoading(false);
+    } else {
+      fetchGraphQL(GetAllPokemons, {})
+        .then((data) => {
+          if (data?.allPokemon) {
+            setPokemons(data.allPokemon);
+            setAllPokemons(data.allPokemon);
+          }
+          setIsLoading(false);
+        })
+        .catch((e) => {
+          setError(e);
+          setIsLoading(false);
+        });
+    }
   }, []);
 
   return { isLoading, pokemons, error };

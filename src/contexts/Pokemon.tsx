@@ -160,6 +160,13 @@ export const PokemonsContextProvider = ({
     setPokemons(allPokemons.filter(({ name }) => name.indexOf(query) !== -1));
   }, [query]);
 
+  useEffect(() => {
+    if (allPokemons.length > 0) {
+      console.log("store in localstorage");
+      localStorage.setItem("allPokemons", JSON.stringify(allPokemons));
+    }
+  }, [localStorage, allPokemons]);
+
   const reset = () => {
     setPokemons(allPokemons);
     setSelectedType("");
