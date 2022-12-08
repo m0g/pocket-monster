@@ -13,10 +13,6 @@ interface PokemonsContextInterface {
   reset: () => void;
   query: string;
   setQuery: (query: string) => void;
-  sortName: string | null;
-  sortDirection: string;
-  handleClickName: () => void;
-  handleClickType: () => void;
 }
 
 const defaultValues: PokemonsContextInterface = {
@@ -51,70 +47,70 @@ export const PokemonsContextProvider = ({
   const [types, setTypes] = useState<Type[]>([]);
   const [selectedType, setSelectedType] = useState("");
   const [query, setQuery] = useState("");
-  const [sortName, setSortName] = useState<SortName>(null);
-  const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
+  // const [sortName, setSortName] = useState<SortName>(null);
+  // const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
 
-  const handleClickName = () => {
-    if (sortName === "name") {
-      if (sortDirection === "asc") {
-        setSortDirection("desc");
-      } else {
-        setSortDirection("asc");
-      }
-    } else {
-      setSortName("name");
-      setSortDirection("asc");
-    }
-  };
+  // const handleClickName = () => {
+  //   if (sortName === "name") {
+  //     if (sortDirection === "asc") {
+  //       setSortDirection("desc");
+  //     } else {
+  //       setSortDirection("asc");
+  //     }
+  //   } else {
+  //     setSortName("name");
+  //     setSortDirection("asc");
+  //   }
+  // };
 
-  const handleClickType = () => {
-    if (sortName === "type") {
-      if (sortDirection === "asc") {
-        setSortDirection("desc");
-      } else {
-        setSortDirection("asc");
-      }
-    } else {
-      setSortName("type");
-      setSortDirection("asc");
-    }
-  };
+  // const handleClickType = () => {
+  //   if (sortName === "type") {
+  //     if (sortDirection === "asc") {
+  //       setSortDirection("desc");
+  //     } else {
+  //       setSortDirection("asc");
+  //     }
+  //   } else {
+  //     setSortName("type");
+  //     setSortDirection("asc");
+  //   }
+  // };
 
-  useEffect(() => {
-    if (sortName === "name" && sortDirection === "asc") {
-      // Sort does not create an array but mutate the old one.
-      // We need to copy the array in order for react to detect the changes
-      const pokemonsCopy = [...pokemons];
+  // useEffect(() => {
+  //   if (sortName === "name" && sortDirection === "asc") {
+  //     // Sort does not create an array but mutate the old one.
+  //     // We need to copy the array in order for react to detect the changes
+  //     const pokemonsCopy = [...pokemons];
 
-      setPokemons(
-        pokemonsCopy.sort((a, b) => {
-          if (a.name < b.name) {
-            return -1;
-          }
-          if (a.name > b.name) {
-            return 1;
-          }
-          return 0;
-        })
-      );
-    }
+  //     setPokemons(
+  //       pokemonsCopy.sort((a, b) => {
+  //         if (a.name < b.name) {
+  //           return -1;
+  //         }
+  //         if (a.name > b.name) {
+  //           return 1;
+  //         }
+  //         return 0;
+  //       })
+  //     );
+  //   }
 
-    if (sortName === "name" && sortDirection === "desc") {
-      const pokemonsCopy = [...pokemons];
+  //   if (sortName === "name" && sortDirection === "desc") {
+  //     const pokemonsCopy = [...pokemons];
 
-      setPokemons(
-        pokemonsCopy.sort((a, b) => {
-          if (a.name > b.name) {
-            return -1;
-          }
-          if (a.name < b.name) {
-            return 1;
-          }
-          return 0;
-        })
-      );
-    }
-  }, [sortDirection, sortName, setPokemons, pokemons]);
+  //     setPokemons(
+  //       pokemonsCopy.sort((a, b) => {
+  //         if (a.name > b.name) {
+  //           return -1;
+  //         }
+  //         if (a.name < b.name) {
+  //           return 1;
+  //         }
+  //         return 0;
+  //       })
+  //     );
+  //   }
+  // }, [sortDirection, sortName, setPokemons, pokemons]);
 
   if (allPokemons.length > 0 && types.length === 0) {
     setTypes(() => {
@@ -148,18 +144,18 @@ export const PokemonsContextProvider = ({
         return shouldInclude;
       });
     });
-  }, [selectedType]);
+  }, [selectedType, allPokemons]);
 
   useEffect(() => {
     setPokemons(allPokemons.filter(({ name }) => name.indexOf(query) !== -1));
-  }, [query]);
+  }, [query, allPokemons]);
 
   useEffect(() => {
     if (allPokemons.length > 0) {
       console.log("store in localstorage");
       localStorage.setItem("allPokemons", JSON.stringify(allPokemons));
     }
-  }, [localStorage, allPokemons]);
+  }, [allPokemons]);
 
   const reset = () => {
     setPokemons(allPokemons);
@@ -180,10 +176,12 @@ export const PokemonsContextProvider = ({
     reset,
     query,
     setQuery,
-    sortName,
-    sortDirection,
-    handleClickName,
-    handleClickType,
+    // sortName,
+    // sortDirection,
+    // setSortName,
+    // setSortDirection,
+    // handleClickName,
+    // handleClickType,
   };
 
   return (

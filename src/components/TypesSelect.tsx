@@ -1,4 +1,4 @@
-import { useCallback, useContext } from "react";
+import { useContext } from "react";
 import { PokemonsContext } from "../contexts/Pokemon";
 
 export default function TypesSelect() {

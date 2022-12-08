@@ -1,9 +1,8 @@
-import { useContext, useState } from "react";
-import { PokemonsContext } from "../contexts/Pokemon";
+import useSortPokemons from "../hooks/sortPokemons";
 
 export default function Sort() {
   const { sortDirection, sortName, handleClickName, handleClickType } =
-    useContext(PokemonsContext);
+    useSortPokemons();
 
   return (
     <div className="px-4 max-w-7xl mx-auto flex gap-2 mb-2">
