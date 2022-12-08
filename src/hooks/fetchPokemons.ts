@@ -27,9 +27,11 @@ export default function usefetchPokemons() {
     if (localStorage.getItem("allPokemons")) {
       const store = JSON.parse(localStorage.getItem("allPokemons") || "{}");
 
-      setPokemons(store);
-      setAllPokemons(store);
-      setIsLoading(false);
+      setTimeout(() => {
+        setPokemons(store);
+        setAllPokemons(store);
+        setIsLoading(false);
+      });
     } else {
       fetchGraphQL(GetAllPokemons, {})
         .then((data) => {

@@ -82,33 +82,28 @@ export const PokemonsContextProvider = ({
 
   useEffect(() => {
     if (sortName === "name" && sortDirection === "asc") {
-      const res = pokemons.sort((a, b) => {
-        if (a.name < b.name) {
-          return -1;
-        }
-        if (a.name > b.name) {
-          return 1;
-        }
-        return 0;
-      });
-      console.log(sortName, sortDirection, res[0]);
-      setPokemons(res);
-      // setPokemons(
-      //   pokemons.sort((a, b) => {
-      //     if (a.name < b.name) {
-      //       return -1;
-      //     }
-      //     if (a.name > b.name) {
-      //       return 1;
-      //     }
-      //     return 0;
-      //   })
-      // );
+      // Sort does not create an array but mutate the old one.
+      // We need to copy the array in order for react to detect the changes
+      const pokemonsCopy = [...pokemons];
+
+      setPokemons(
+        pokemonsCopy.sort((a, b) => {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        })
+      );
     }
 
     if (sortName === "name" && sortDirection === "desc") {
+      const pokemonsCopy = [...pokemons];
+
       setPokemons(
-        pokemons.sort((a, b) => {
+        pokemonsCopy.sort((a, b) => {
           if (a.name > b.name) {
             return -1;
           }
