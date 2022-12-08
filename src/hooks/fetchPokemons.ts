@@ -36,8 +36,13 @@ export default function usefetchPokemons() {
       fetchGraphQL(GetAllPokemons, {})
         .then((data) => {
           if (data?.allPokemon) {
-            setPokemons(data.allPokemon);
-            setAllPokemons(data.allPokemon);
+            const pokemonsWithFavorites = data.allPokemon.map((pokemon) => ({
+              ...pokemon,
+              isFavorite: false,
+            }));
+
+            setPokemons(pokemonsWithFavorites);
+            setAllPokemons(pokemonsWithFavorites);
           }
           setIsLoading(false);
         })

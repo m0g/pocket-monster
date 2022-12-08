@@ -28,10 +28,6 @@ const defaultValues: PokemonsContextInterface = {
   reset: () => undefined,
   query: "",
   setQuery: () => undefined,
-  sortName: null,
-  sortDirection: "",
-  handleClickName: () => undefined,
-  handleClickType: () => undefined,
 };
 export const PokemonsContext =
   createContext<PokemonsContextInterface>(defaultValues);
@@ -47,70 +43,6 @@ export const PokemonsContextProvider = ({
   const [types, setTypes] = useState<Type[]>([]);
   const [selectedType, setSelectedType] = useState("");
   const [query, setQuery] = useState("");
-  // const [sortName, setSortName] = useState<SortName>(null);
-  // const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
-
-  // const handleClickName = () => {
-  //   if (sortName === "name") {
-  //     if (sortDirection === "asc") {
-  //       setSortDirection("desc");
-  //     } else {
-  //       setSortDirection("asc");
-  //     }
-  //   } else {
-  //     setSortName("name");
-  //     setSortDirection("asc");
-  //   }
-  // };
-
-  // const handleClickType = () => {
-  //   if (sortName === "type") {
-  //     if (sortDirection === "asc") {
-  //       setSortDirection("desc");
-  //     } else {
-  //       setSortDirection("asc");
-  //     }
-  //   } else {
-  //     setSortName("type");
-  //     setSortDirection("asc");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (sortName === "name" && sortDirection === "asc") {
-  //     // Sort does not create an array but mutate the old one.
-  //     // We need to copy the array in order for react to detect the changes
-  //     const pokemonsCopy = [...pokemons];
-
-  //     setPokemons(
-  //       pokemonsCopy.sort((a, b) => {
-  //         if (a.name < b.name) {
-  //           return -1;
-  //         }
-  //         if (a.name > b.name) {
-  //           return 1;
-  //         }
-  //         return 0;
-  //       })
-  //     );
-  //   }
-
-  //   if (sortName === "name" && sortDirection === "desc") {
-  //     const pokemonsCopy = [...pokemons];
-
-  //     setPokemons(
-  //       pokemonsCopy.sort((a, b) => {
-  //         if (a.name > b.name) {
-  //           return -1;
-  //         }
-  //         if (a.name < b.name) {
-  //           return 1;
-  //         }
-  //         return 0;
-  //       })
-  //     );
-  //   }
-  // }, [sortDirection, sortName, setPokemons, pokemons]);
 
   if (allPokemons.length > 0 && types.length === 0) {
     setTypes(() => {
@@ -163,6 +95,19 @@ export const PokemonsContextProvider = ({
     setQuery("");
   };
 
+  const toggleFavorite = (id: number, isFavorite: boolean) => {
+    const toggleIterate = (pokemon: Pokemon) => {
+      if (pokemon.id == id) {
+        pokemon.isFavorite = isFavorite;
+      }
+
+      return pokemon;
+    };
+
+    setPokemons((pokemons) => pokemons.map(toggleIterate));
+    setAllPokemons((pokemons) => pokemons.map(toggleIterate));
+  };
+
   const pokemonsContext = {
     pokemons,
     setPokemons,
@@ -176,12 +121,7 @@ export const PokemonsContextProvider = ({
     reset,
     query,
     setQuery,
-    // sortName,
-    // sortDirection,
-    // setSortName,
-    // setSortDirection,
-    // handleClickName,
-    // handleClickType,
+    toggleFavorite,
   };
 
   return (

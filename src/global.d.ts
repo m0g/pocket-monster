@@ -9,6 +9,7 @@ declare global {
     id: number;
     name: string;
     types: Type[];
+    isFavorite: boolean;
     sprites: {
       front_default: string;
     };
