@@ -1,7 +1,10 @@
-// your-app-name/src/fetchGraphQL.js
+const apiUrl =
+  import.meta.env.MODE === "production"
+    ? "https://dex-server.herokuapp.com"
+    : "http://localhost:4000";
+
 async function fetchGraphQL(text: string) {
-  // Fetch data from GitHub's GraphQL API:
-  const response = await fetch("http://localhost:4000", {
+  const response = await fetch(apiUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -11,7 +14,6 @@ async function fetchGraphQL(text: string) {
     }),
   });
 
-  // Get the response as JSON
   const json = await response.json();
 
   return json.data;
