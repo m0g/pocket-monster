@@ -47,7 +47,6 @@ export const PokemonsContextProvider = ({
 
   useEffect(() => {
     if (allPokemons.length > 0) {
-      console.log("store in localstorage");
       localStorage.setItem("allPokemons", JSON.stringify(allPokemons));
     }
   }, [allPokemons]);

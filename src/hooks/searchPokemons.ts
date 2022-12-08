@@ -6,9 +6,8 @@ export default function useSearchPokemons() {
     useContext(PokemonsContext);
 
   useEffect(() => {
-    console.log("query set pokemon");
     setPokemons(allPokemons.filter(({ name }) => name.indexOf(query) !== -1));
-  }, [query, allPokemons]);
+  }, [query, allPokemons, setPokemons]);
 
   return {
     query,

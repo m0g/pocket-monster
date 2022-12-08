@@ -22,7 +22,6 @@ export default function useSelectType() {
   }
 
   useEffect(() => {
-    console.log("selected type");
     setPokemons(() => {
       if (selectedType === "") {
         return allPokemons;

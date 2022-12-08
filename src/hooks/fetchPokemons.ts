@@ -36,7 +36,6 @@ export default function usefetchPokemons({ onlyFavorites = false }) {
         setPokemons(onlyFavorites ? getOnlyFavorites(store) : store);
         setAllPokemons(store);
         setIsLoading(false);
-        console.log(onlyFavorites ? getOnlyFavorites(store) : store);
       });
     } else {
       fetchGraphQL(GetAllPokemons, {})
