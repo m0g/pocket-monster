@@ -19,9 +19,26 @@ interface PokemonsContextInterface {
   handleClickType: () => void;
 }
 
-export const PokemonsContext = createContext<
-  PokemonsContextInterface | undefined
->(undefined);
+const defaultValues: PokemonsContextInterface = {
+  pokemons: [],
+  setPokemons: () => undefined,
+  allPokemons: [],
+  setAllPokemons: () => undefined,
+  isLoading: true,
+  setIsLoading: () => undefined,
+  types: [],
+  selectedType: "",
+  setSelectedType: () => undefined,
+  reset: () => undefined,
+  query: "",
+  setQuery: () => undefined,
+  sortName: null,
+  sortDirection: "",
+  handleClickName: () => undefined,
+  handleClickType: () => undefined,
+};
+export const PokemonsContext =
+  createContext<PokemonsContextInterface>(defaultValues);
 
 export const PokemonsContextProvider = ({
   children,

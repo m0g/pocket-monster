@@ -8,6 +8,7 @@ module.exports = {
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
   ],
   overrides: [],
   parser: "@typescript-eslint/parser",
@@ -18,5 +19,6 @@ module.exports = {
   plugins: ["react", "@typescript-eslint"],
   rules: {
     "react/react-in-jsx-scope": 0,
+    "react-hooks/rules-of-hooks": 0, // This does not work
   },
 };

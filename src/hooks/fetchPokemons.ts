@@ -18,14 +18,8 @@ const GetAllPokemons = `
 `;
 
 export default function usefetchPokemons() {
-  const {
-    pokemons,
-    setPokemons,
-    allPokemons,
-    setAllPokemons,
-    isLoading,
-    setIsLoading,
-  } = useContext(PokemonsContext);
+  const { pokemons, setPokemons, setAllPokemons, isLoading, setIsLoading } =
+    useContext(PokemonsContext);
 
   const [error, setError] = useState(null);
 
@@ -50,7 +44,7 @@ export default function usefetchPokemons() {
           setIsLoading(false);
         });
     }
-  }, []);
+  }, [setAllPokemons, setPokemons, setIsLoading, setError]);
 
   return { isLoading, pokemons, error };
 }
