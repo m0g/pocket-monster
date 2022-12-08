@@ -1,10 +1,5 @@
-const apiUrl =
-  import.meta.env.MODE === "production"
-    ? "https://dex-server.herokuapp.com"
-    : "http://localhost:4000";
-
 async function fetchGraphQL(text: string) {
-  const response = await fetch(apiUrl, {
+  const response = await fetch("https://dex-server.loicnogu.es", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
