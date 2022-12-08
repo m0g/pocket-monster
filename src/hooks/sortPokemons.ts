@@ -67,16 +67,29 @@ export default function useSortPokemons() {
       );
     }
 
-    // Sort for types is only done on the first type of each pokemon
     if (sortName === "type" && sortDirection === "asc") {
       const pokemonsCopy = [...pokemons];
 
       setPokemons(
-        pokemonsCopy.sort((a, b) => {
-          if (a.types[0].name < b.types[0].name) {
+        pokemonsCopy.sort((a: Pokemon, b: Pokemon) => {
+          const sortTypes = (types: Type[]) =>
+            types.sort((a, b) => {
+              if (a.name < b.name) {
+                return -1;
+              }
+              if (a.name > b.name) {
+                return 1;
+              }
+              return 0;
+            });
+
+          const sortedAName = sortTypes(a.types)[0].name;
+          const sortedBName = sortTypes(b.types)[0].name;
+
+          if (sortedAName < sortedBName) {
             return -1;
           }
-          if (a.types[0].name > b.types[0].name) {
+          if (sortedAName > sortedBName) {
             return 1;
           }
           return 0;
@@ -88,11 +101,25 @@ export default function useSortPokemons() {
       const pokemonsCopy = [...pokemons];
 
       setPokemons(
-        pokemonsCopy.sort((a, b) => {
-          if (a.types[0].name > b.types[0].name) {
+        pokemonsCopy.sort((a: Pokemon, b: Pokemon) => {
+          const sortTypes = (types: Type[]) =>
+            types.sort((a, b) => {
+              if (a.name > b.name) {
+                return -1;
+              }
+              if (a.name < b.name) {
+                return 1;
+              }
+              return 0;
+            });
+
+          const sortedAName = sortTypes(a.types)[0].name;
+          const sortedBName = sortTypes(b.types)[0].name;
+
+          if (sortedAName > sortedBName) {
             return -1;
           }
-          if (a.types[0].name < b.types[0].name) {
+          if (sortedAName < sortedBName) {
             return 1;
           }
           return 0;
