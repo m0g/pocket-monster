@@ -1,5 +1,6 @@
 import List from "../components/List";
 import Sort from "../components/Sort";
+import Header from "../components/Header";
 import usefetchPokemons from "./../hooks/fetchPokemons";
 
 export default function Home() {
@@ -10,9 +11,12 @@ export default function Home() {
   if (error) return <p>{error.toString()}</p>;
 
   return (
-    <div>
-      <Sort />
-      <List />
+    <div className="pt-20">
+      <Header />
+      <div>
+        <Sort />
+        <List />
+      </div>
     </div>
   );
 }

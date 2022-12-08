@@ -17,20 +17,26 @@ const GetAllPokemons = `
   }
 `;
 
-export default function usefetchPokemons() {
+export default function usefetchPokemons({ onlyFavorites = false }) {
   const { pokemons, setPokemons, setAllPokemons, isLoading, setIsLoading } =
     useContext(PokemonsContext);
 
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const getOnlyFavorites = (pokemons) => {
+      // const pokemonsCopy = [...pokemons];
+      return pokemons.filter(({ isFavorite }) => isFavorite);
+    };
+
     if (localStorage.getItem("allPokemons")) {
       const store = JSON.parse(localStorage.getItem("allPokemons") || "{}");
 
       setTimeout(() => {
-        setPokemons(store);
+        setPokemons(onlyFavorites ? getOnlyFavorites(store) : store);
         setAllPokemons(store);
         setIsLoading(false);
+        console.log(onlyFavorites ? getOnlyFavorites(store) : store);
       });
     } else {
       fetchGraphQL(GetAllPokemons, {})
@@ -41,7 +47,11 @@ export default function usefetchPokemons() {
               isFavorite: false,
             }));
 
-            setPokemons(pokemonsWithFavorites);
+            setPokemons(
+              onlyFavorites
+                ? getOnlyFavorites(pokemonsWithFavorites)
+                : pokemonsWithFavorites
+            );
             setAllPokemons(pokemonsWithFavorites);
           }
           setIsLoading(false);

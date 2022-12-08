@@ -5,14 +5,9 @@ import Home from "./Home";
 
 export default function AppRoutes() {
   return (
-    <div className="pt-20">
-      <Header />
-      <div>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/favorites" element={<Favorites />} />
-        </Routes>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/favorites" element={<Favorites />} />
+    </Routes>
   );
 }

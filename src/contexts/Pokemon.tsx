@@ -61,6 +61,7 @@ export const PokemonsContextProvider = ({
   }
 
   useEffect(() => {
+    console.log("selected type");
     setPokemons(() => {
       if (selectedType === "") {
         return allPokemons;
@@ -81,6 +82,7 @@ export const PokemonsContextProvider = ({
   }, [selectedType, allPokemons]);
 
   useEffect(() => {
+    console.log("query set pokemon");
     setPokemons(allPokemons.filter(({ name }) => name.indexOf(query) !== -1));
   }, [query, allPokemons]);
 
