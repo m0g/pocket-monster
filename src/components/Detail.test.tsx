@@ -1,4 +1,4 @@
-import { describe, it, test, expect } from "vitest";
+import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Detail from "./Detail";
 
@@ -14,6 +14,7 @@ describe("Detail test", () => {
           "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
       },
     };
+
     render(<Detail {...pokemon} />);
     expect(screen.getByText(/test/i)).toBeDefined();
     expect(screen.getByText(/earth/i)).toBeDefined();
