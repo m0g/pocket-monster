@@ -64,8 +64,8 @@ export const PokemonsContextProvider = ({
       return pokemon;
     };
 
+    setAllPokemons((pokemons) => pokemons.map(toggleIterate)); // this line reset the order!
     setPokemons((pokemons) => pokemons.map(toggleIterate));
-    setAllPokemons((pokemons) => pokemons.map(toggleIterate));
   };
 
   const pokemonsContext = {

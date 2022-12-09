@@ -1,15 +1,19 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { PokemonsContext } from "../contexts/Pokemon";
 
 export default function useSearchPokemons() {
   const { setPokemons, allPokemons, query, setQuery } =
     useContext(PokemonsContext);
 
-  useEffect(() => {
-    setPokemons(allPokemons.filter(({ name }) => name.indexOf(query) !== -1));
-  }, [query, allPokemons, setPokemons]);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPokemons(
+      allPokemons.filter(({ name }) => name.indexOf(e.target.value) !== -1)
+    );
+    setQuery(e.target.value);
+  };
 
   return {
+    handleChange,
     query,
     setQuery,
   };

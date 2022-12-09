@@ -1,11 +1,7 @@
 import useSelectType from "../hooks/selectType";
 
 export default function TypesSelect() {
-  const { types, selectedType, setSelectedType } = useSelectType();
-
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedType(e.target.value);
-  };
+  const { types, selectedType, handleChange } = useSelectType();
 
   return (
     <select value={selectedType} onChange={handleChange}>

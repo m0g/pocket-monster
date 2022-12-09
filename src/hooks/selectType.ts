@@ -21,7 +21,9 @@ export default function useSelectType() {
     });
   }
 
-  useEffect(() => {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedType = e.target.value;
+
     setPokemons(() => {
       if (selectedType === "") {
         return allPokemons;
@@ -39,7 +41,9 @@ export default function useSelectType() {
         return shouldInclude;
       });
     });
-  }, [selectedType, allPokemons, setPokemons]);
 
-  return { types, selectedType, setSelectedType };
+    setSelectedType(selectedType);
+  };
+
+  return { types, selectedType, handleChange };
 }

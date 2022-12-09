@@ -24,6 +24,7 @@ export default function usefetchPokemons({ onlyFavorites = false }) {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
+    console.log("fetch");
     const getOnlyFavorites = (pokemons: Pokemon[]) => {
       return pokemons.filter(({ isFavorite }) => isFavorite);
     };
