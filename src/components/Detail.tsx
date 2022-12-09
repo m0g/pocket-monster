@@ -8,7 +8,6 @@ export default function Detail({
   types,
   isFavorite,
 }: Pokemon) {
-  // const [isFavorite, setIsFavorite] = useState(false);
   const { toggleFavorite } = useContext(PokemonsContext);
 
   const handleClick = () => {
